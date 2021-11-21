@@ -21,7 +21,7 @@ Use the state saved in train phase here.
 
 
 class Agent:
-    def __init__(self, env, discount_rate=0.97, learning_rate=0.008):
+    def __init__(self, env, discount_rate=0.97, learning_rate=0.7):
         self.env_name = env
         self.config = config[self.env_name]
 
