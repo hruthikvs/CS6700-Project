@@ -33,7 +33,7 @@ class Agent:
             self.action_size = self.config[1]
             self.eps = 1
 
-            self.discount_rate = 0.97
+            self.discount_rate = 0.98
             self.learning_rate = 0.62
             self.q_table =  1e-4*np.zeros([self.state_size, self.action_size])
             self.p_state = 0
@@ -47,7 +47,7 @@ class Agent:
             self.eps = 1
 
             self.discount_rate = 1
-            self.learning_rate = 0.8 if self.env_name=='kbca' else 0.8 if self.env_name=='kbcb' else 0.8
+            self.learning_rate = 0.5 if self.env_name=='kbca' else 0.8 if self.env_name=='kbcb' else 0.8
             self.get_qTableKBC()
             self.state_list =[]
             self.lam = 0.9
@@ -128,6 +128,8 @@ class Agent:
             self.p_state = state
             self.p_action = q_action
 
+
+
             return self.p_action
 
 
@@ -177,9 +179,7 @@ class Agent:
 
             self.p_state = next_state
 
-            action_greedy = np.argmax(q_next)
-            action_random = random.choice(np.arange(self.action_size))
-            #next_action = action_random if random.random() < self.eps else action_greedy
+
             next_action = 1
 
             print('prev Act =', self.p_action, 'next act=', next_action)
@@ -214,7 +214,7 @@ class Agent:
             print('reward', reward)
             self.p_action = next_action
             if done:
-                self.eps = self.eps * .9999
+                self.eps = self.eps * 1
 
             return next_action
 
@@ -260,7 +260,6 @@ class Agent:
         if (self.env_name == 'taxi'):
             q_state = self.q_table[obs]
             action = np.argmax(q_state)
-            #comitted
 
         if (self.env_name == 'kbca' or self.env_name == 'kbcb' or self.env_name == 'kbcc' ):
             state = obs.count(1)

@@ -18,4 +18,3 @@ config['kbcb'] = [env.N+1,env.action_space.n]
 env = aicrowd_gym.make("gym_bellman:kbc-c-v0")
 config['kbcc'] = [env.N+1,env.action_space.n]
 
-print(config)
